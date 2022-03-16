@@ -18,13 +18,19 @@ import net.datastructures.PositionalList;
 public class Assignment1 {
 
     /**
-     * @param args
-     * @throws Exception
+     * Calls displaySpellingErrorsAndStatistics().
+     * 
+     * @param args Not used.
+     * @throws Exception Not used.
      */
     public static void main(String[] args) throws Exception {
         displaySpellingErrorsAndStatistics();
     }
 
+    /**
+     * Displays misspelled words, their suggestions, as well as statistics as
+     * specified in the handout.
+     */
     public static void displaySpellingErrorsAndStatistics() {
         PositionalList<String> wordList = Spellchecker.readWordList("jlawler-wordlist.txt");
         ArrayList<String> textFileList = Spellchecker.readTextFile("sampleTextFile.txt");
@@ -43,11 +49,13 @@ public class Assignment1 {
         System.out.printf("Replacements: %d\n", stats[3]);
     }
 
-    
-    /** 
-     * @param spellcheckedWords
-     * @param stats
-     * @return int
+    /**
+     * @param spellcheckedWords list of lists of spellchecked words and their
+     *                          suggestions.
+     * @param stats             int array tracking # of insertions, deletions,
+     *                          swaps, replacements, as well as # of suggestions
+     *                          overall.
+     * @return int number of words checked for spelling errors.
      */
     public static int displaySpellingErrors(PositionalList<String> wordList, ArrayList<String> textFileList,
             ArrayList<ArrayList<String>> spellcheckedWords, int[] stats) {

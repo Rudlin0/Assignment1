@@ -16,8 +16,10 @@ import net.datastructures.PositionalList;
 public class Spellchecker {
 
     /**
-     * @param filename
-     * @return LinkedPositionalList<String>
+     * Reads in a list of words from a file to be checked against.
+     * 
+     * @param filename name of the file being read in.
+     * @return LinkedPositionalList<String> list of words read in.
      */
     public static LinkedPositionalList<String> readWordList(String filename) {
         Scanner input = null;
@@ -36,14 +38,19 @@ public class Spellchecker {
         return wordList;
     }
 
+    /**
+     * Tests readWordList() for valid output.
+     */
     @Test
     public void testReadWordList() {
         assertEquals("a", readWordList("/Users/Rudy/CS271/Assignment1/jlawler-wordlist.txt").first().getElement());
     }
 
     /**
-     * @param filename
-     * @return ArrayList<String>
+     * Reads in a text file of words to check if they are misspelled.
+     * 
+     * @param filename name of the file being read in.
+     * @return ArrayList<String> List of words in the file.
      */
     public static ArrayList<String> readTextFile(String filename) {
         Scanner input = null;
@@ -63,16 +70,23 @@ public class Spellchecker {
         return textFileWords;
     }
 
+    /**
+     * Tests readTextFile() for valid output.
+     */
     @Test
     public void testReadTextFile() {
         assertEquals("Onec", readTextFile("/Users/Rudy/CS271/Assignment1/sampleTextFile.txt").get(0));
     }
 
     /**
-     * @param word
-     * @param wordList
-     * @param stats
-     * @return ArrayList<String>
+     * Checks how a word is misspelled and gives suggestions.
+     * 
+     * @param word     Word to be checked for misspelling.
+     * @param wordList Dictionary of words to be referenced against.
+     * @param stats    int array tracking # of insertions, deletions, swaps,
+     *                 replacements, as well as # of suggestions overall.
+     * @return ArrayList<String> List consisting of initial word, as well as
+     *         suggested replacement words.
      */
     public static ArrayList<String> spellcheck(String word, PositionalList<String> wordList, int[] stats) {
 
@@ -106,10 +120,14 @@ public class Spellchecker {
     }
 
     /**
-     * @param wordList
-     * @param wordAndRelated
-     * @param stats
-     * @return int
+     * Swaps adjacent letters to check if resulting word is valid or not.
+     * 
+     * @param wordList       Dictionary of words to be referenced against.
+     * @param wordAndRelated List consisting of initial word and any suggestions
+     *                       made up to this point.
+     * @param stats          int array tracking # of insertions, deletions, swaps,
+     *                       replacements, as well as # of suggestions overall.
+     * @return int # of successful swaps.
      */
     public static int swapAdjacentLetters(PositionalList<String> wordList,
             ArrayList<String> wordAndRelated, int[] stats) {
@@ -145,8 +163,11 @@ public class Spellchecker {
         return swaps;
     }
 
+    /**
+     * Tests swapAdjacentLetters() for valid output.
+     */
     @Test
-    public void testDidSwapAdjacentLetters() {
+    public void testSwapAdjacentLetters() {
         ArrayList<String> wordAndRelated = new ArrayList<>();
         wordAndRelated.add(0, "onec");
         int[] stats = new int[5];
@@ -155,10 +176,14 @@ public class Spellchecker {
     }
 
     /**
-     * @param wordList
-     * @param wordAndRelated
-     * @param stats
-     * @return int
+     * Inserts additional letters into word to check if result is valid or not.
+     * 
+     * @param wordList       Dictionary of words to be referenced against.
+     * @param wordAndRelated List consisting of initial word and any suggestions
+     *                       made up to this point.
+     * @param stats          int array tracking # of insertions, deletions, swaps,
+     *                       replacements, as well as # of suggestions overall.
+     * @return int # of successful insertions.
      */
     public static int insertExtraLetter(PositionalList<String> wordList, ArrayList<String> wordAndRelated,
             int[] stats) {
@@ -206,6 +231,9 @@ public class Spellchecker {
         return insertions;
     }
 
+    /**
+     * Tests insertExtraLetter() for valid output.
+     */
     @Test
     public void testInsertExtraLetter() {
         ArrayList<String> wordAndRelated = new ArrayList<>();
@@ -216,10 +244,14 @@ public class Spellchecker {
     }
 
     /**
-     * @param wordList
-     * @param wordAndRelated
-     * @param stats
-     * @return int
+     * Removes letters from word to check if result is valid or not.
+     * 
+     * @param wordList       Dictionary of words to be referenced against.
+     * @param wordAndRelated List consisting of initial word and any suggestions
+     *                       made up to this point.
+     * @param stats          int array tracking # of insertions, deletions, swaps,
+     *                       replacements, as well as # of suggestions overall.
+     * @return int # of successful deletions.
      */
     public static int deleteSingleLetter(PositionalList<String> wordList, ArrayList<String> wordAndRelated,
             int[] stats) {
@@ -265,6 +297,9 @@ public class Spellchecker {
         return deletions;
     }
 
+    /**
+     * Tests deleteSingleLetter() for valid output.
+     */
     @Test
     public void testDeleteSingleLetter() {
         ArrayList<String> wordAndRelated = new ArrayList<>();
@@ -275,10 +310,14 @@ public class Spellchecker {
     }
 
     /**
-     * @param wordList
-     * @param wordAndRelated
-     * @param stats
-     * @return int
+     * Replaces letters in word to check if result is valid or not.
+     * 
+     * @param wordList       Dictionary of words to be referenced against.
+     * @param wordAndRelated List consisting of initial word and any suggestions
+     *                       made up to this point.
+     * @param stats          int array tracking # of insertions, deletions, swaps,
+     *                       replacements, as well as # of suggestions overall.
+     * @return int # of successful replacements.
      */
     public static int replaceSingleLetter(PositionalList<String> wordList, ArrayList<String> wordAndRelated,
             int[] stats) {
@@ -326,6 +365,9 @@ public class Spellchecker {
         return replacements;
     }
 
+    /**
+     * Tests replaceSingleLetter() for valid output.
+     */
     @Test
     public void testReplaceSingleLetter() {
         ArrayList<String> wordAndRelated = new ArrayList<>();
